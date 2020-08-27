@@ -1,7 +1,6 @@
 from flask import Flask,render_template,request,Response
 from getcaptchaimg import login_to_website
 from htm2json import Attendance2JSON
-from htm2json import attendanceJSON
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -18,16 +17,13 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return render_template("index.html")
-@app.route('/json')
-def jsonfinal():
-    return attendanceJSON
 
 @app.route("/displaySLCM",methods=["POST"])
 def getAttendance():
     print(request.form['username'],request.form['password'])
     AttendanceHTML = login_to_website(request.form['username'],request.form['password'])
     attendanceJSON = Attendance2JSON(AttendanceHTML)
-    return render_template("index.html",attd=attendanceJSON)
+    return attendanceJSON
 
 @app.route("/api/v1/get",methods=["POST"])
 def handleRequest():

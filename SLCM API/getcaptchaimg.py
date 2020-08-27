@@ -53,10 +53,10 @@ def login_to_website(username=None,password=None):
     AttendanceHTML = None
     user_id = driver.find_element_by_xpath('//*[@id="txtUserid"]')
     user_id.clear()
-    user_id.send_keys('180907644')
+    user_id.send_keys(username)
     passwordfinal = driver.find_element_by_xpath('//*[@id="txtpassword"]')
     passwordfinal.clear()
-    passwordfinal.send_keys('gokulnandana')
+    passwordfinal.send_keys(password)
     time.sleep(2)
     captcha = driver.find_element_by_xpath('//*[@id="txtCaptcha"]')
     captcha.clear()
@@ -83,14 +83,12 @@ def login_to_website(username=None,password=None):
     AttendanceHTML = element.get_attribute('outerHTML')
     #print(outer)
     #Find Internal Mark Table
-    driver.find_element_by_xpath('//a[@href="#4"]').click()
-    element = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.ID,'PrintInternal')))
-    MarksHTML = element.get_attribute('outerHTML')
     #print(marks)
     #Logout of SLCM and close chromewebdriver
-    return AttendanceHTML,MarksHTML
-    
-AttendanceHTML,MarksHTML = login_to_website("username","password")
+    return AttendanceHTML
+
+if __name__ == "__main__":
+    AttendanceHTML = login_to_website("username","password")
 
 # response = requests.get('https://slcm.manipal.edu/images/logo.png')
 # file = open("captchaimage.jpg", "wb")
