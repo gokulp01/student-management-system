@@ -1,0 +1,84 @@
+{
+  "attendance": [
+    {
+      "Academic Year": "2020-2021",
+      "Subject Code": "ECE 3151",
+      "Subject": "ANALOG AND DIGITAL COMMUNICATION",
+      "Semester": "V",
+      "Total Class": "0",
+      "Days Present": "0",
+      "Days Absent": "0",
+      "Attendance(%)": "0.00"
+    },
+    {
+      "Academic Year": "2020-2021",
+      "Subject Code": "ECE 3152",
+      "Subject": "LINEAR CONTROL THEORY",
+      "Semester": "V",
+      "Total Class": "0",
+      "Days Present": "0",
+      "Days Absent": "0",
+      "Attendance(%)": "0.00"
+    },
+    {
+      "Academic Year": "2020-2021",
+      "Subject Code": "ECE 3153",
+      "Subject": "MICROPROCESSORS",
+      "Semester": "V",
+      "Total Class": "0",
+      "Days Present": "0",
+      "Days Absent": "0",
+      "Attendance(%)": "0.00"
+    },
+    {
+      "Academic Year": "2020-2021",
+      "Subject Code": "ECE 3154",
+      "Subject": "MICROWAVE ENGINEERING",
+      "Semester": "V",
+      "Total Class": "0",
+      "Days Present": "0",
+      "Days Absent": "0",
+      "Attendance(%)": "0.00"
+    },
+    {
+      "Academic Year": "2020-2021",
+      "Subject Code": "ECE 3161",
+      "Subject": "DSP LAB",
+      "Semester": "V",
+      "Total Class": "0",
+      "Days Present": "0",
+      "Days Absent": "0",
+      "Attendance(%)": "0.00"
+    },
+    {
+      "Academic Year": "2020-2021",
+      "Subject Code": "ECE 3162",
+      "Subject": "MICROPROCESSOR  LAB",
+      "Semester": "V",
+      "Total Class": "0",
+      "Days Present": "0",
+      "Days Absent": "0",
+      "Attendance(%)": "0.00"
+    },
+    {
+      "Academic Year": "2020-2021",
+      "Subject Code": "HUM 3051",
+      "Subject": "ENGG. ECONOMICS & FINANCIAL MANAGEMENT",
+      "Semester": "V",
+      "Total Class": "0",
+      "Days Present": "0",
+      "Days Absent": "0",
+      "Attendance(%)": "0.00"
+    },
+    {
+      "Academic Year": "2020-2021",
+      "Subject Code": "ICT 4304",
+      "Subject": "MACHINE LEARNING TOOLS & TECHNPLOGIES",
+      "Semester": "V",
+      "Total Class": "0",
+      "Days Present": "0",
+      "Days Absent": "0",
+      "Attendance(%)": "0.00"
+    }
+  ]
+}

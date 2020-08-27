@@ -15,6 +15,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import pytesseract as tess
 from PIL import Image
+
 tess.pytesseract.tesseract_cmd = r'D:\TESSERACT\tesseract.exe'
 headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4.4147.135 Safari/537.36' } 
 baseurl = 'https://slcm.manipal.edu/'
@@ -25,7 +26,9 @@ images = s.find('img',{'id':'imgCaptcha'})['src']
 
 captchaurl = baseurl + images 
 print(captchaurl)
-driver = webdriver.Chrome(ChromeDriverManager().install())
+##op = webdriver.ChromeOptions()
+##op.add_argument('headless')
+driver = webdriver.Chrome(ChromeDriverManager().install()) ##,options=op
 driver.get(url)
 driver.implicitly_wait(3)
 driver.execute_script("window.open()")
@@ -63,11 +66,6 @@ def login_to_website(username=None,password=None):
     captcha.send_keys(captcha_text)
     time.sleep(10)
     driver.find_element_by_xpath('//*[@id="btnLogin"]').click() 
-    time.sleep(6)
-    get_url = driver.current_url 
-    print(get_url)
-    if (get_url == 'https://slcm.manipal.edu/studenthomepage.aspx'):
-        print('OK')
     try:
         element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, 'rtpchkMenu_lnkbtn2_1')))
     except:
@@ -85,6 +83,8 @@ def login_to_website(username=None,password=None):
     #Find Internal Mark Table
     #print(marks)
     #Logout of SLCM and close chromewebdriver
+    driver.get("https://slcm.manipal.edu/loginForm.aspx")
+    driver.quit()
     return AttendanceHTML
 
 if __name__ == "__main__":

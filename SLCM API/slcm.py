@@ -23,16 +23,18 @@ def getAttendance():
     print(request.form['username'],request.form['password'])
     AttendanceHTML = login_to_website(request.form['username'],request.form['password'])
     attendanceJSON = Attendance2JSON(AttendanceHTML)
-    return attendanceJSON
+    respo = Response(attendanceJSON,200)
+    respo.headers['Content-Type'] = "application/json"
+    return respo
 
 @app.route("/api/v1/get",methods=["POST"])
 def handleRequest():
-    request_body = dict(request.get_json())
-    username = request_body['request']['credentials']['username']
-    password = request_body['request']['credentials']['password']
-    tpe =request_body['request']['type']
+    request_body = request.get_json()
+    username = request_body["username"]
+    password = request_body["password"]
+    tpe =request_body["type"]
     if(tpe == "ATTENDANCE"):
-        attd,_=login_to_website(username,password)
+        attd=login_to_website(username,password)
         jsn = Attendance2JSON(attd)
         resp = Response(jsn,200)
         resp.headers['Content-Type'] = "application/json"
@@ -49,6 +51,5 @@ def handleRequest():
         resp = Response("Error",501)
         return resp
     return "Error Occured"
-
 if __name__ == "__main__":
     app.run()
