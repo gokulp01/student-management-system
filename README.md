@@ -1,5 +1,5 @@
 
-<img src="https://github.com/gokulp01/slcm_api/blob/master/mages/mahelogo.png?raw=true" height="200" /> 			
+<img src="https://github.com/gokulp01/slcm_api/blob/master/images/mahelogo.png?raw=true" height="200" /> 			
 # SLCM API(With Captcha Support)
 The SLCM API is simple,secure web application based on Flask that allows for retrieving attendance and marks data from the [SLcM Website](https://slcm.manipal.edu) .
 
