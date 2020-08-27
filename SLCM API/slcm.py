@@ -10,8 +10,10 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from pyvirtualdisplay import Display
 from json import dumps
+from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__)
+run_with_ngrok(app)
 
 
 @app.route("/")
