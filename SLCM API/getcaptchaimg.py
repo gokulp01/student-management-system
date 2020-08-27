@@ -48,15 +48,15 @@ img = Image.open('screenshot.png')
 captcha_text = tess.image_to_string(img).strip()
 print(captcha_text)
 driver.switch_to.window(driver.window_handles[0])
-def login_to_website():
+def login_to_website(username=None,password=None):
     MarksHTML = None
     AttendanceHTML = None
     user_id = driver.find_element_by_xpath('//*[@id="txtUserid"]')
     user_id.clear()
     user_id.send_keys('180907644')
-    password = driver.find_element_by_xpath('//*[@id="txtpassword"]')
-    password.clear()
-    password.send_keys('gokulnandana')
+    passwordfinal = driver.find_element_by_xpath('//*[@id="txtpassword"]')
+    passwordfinal.clear()
+    passwordfinal.send_keys('gokulnandana')
     time.sleep(2)
     captcha = driver.find_element_by_xpath('//*[@id="txtCaptcha"]')
     captcha.clear()
@@ -90,7 +90,7 @@ def login_to_website():
     #Logout of SLCM and close chromewebdriver
     return AttendanceHTML,MarksHTML
     
-AttendanceHTML,MarksHTML = login_to_website()
+AttendanceHTML,MarksHTML = login_to_website("username","password")
 
 # response = requests.get('https://slcm.manipal.edu/images/logo.png')
 # file = open("captchaimage.jpg", "wb")

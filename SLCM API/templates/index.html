@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLcM API</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function DisplayMessage()
+        {
+            var msg = document.getElementById("msg");
+            msg.style.visibility="visible";
+        }
+    </script>
+    <h1 align="center">SLcM API</h1> 
+    <form id="getResults" method="POST" action="/displaySLCM" >
+        <input type="text" id = "username" name="username"/>
+        <input type="password" id = "password" name="password"/>
+        <input type="submit" value="Get Results" onclick="DisplayMessage()"/>
+    </form>   
+    <p id="msg" style="color: red;visibility: hidden;">Waiting For Results</p>
+    <div id="results">
+        <hr/>
+        {{subs}}
+        <hr/>
+        {{marks}}
+        <hr/>
+        {{attd}}
+        <hr/>
+    </div>
+</body>
+</html>
