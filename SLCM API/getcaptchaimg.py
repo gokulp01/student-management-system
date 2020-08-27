@@ -49,8 +49,8 @@ captcha_text = tess.image_to_string(img).strip()
 print(captcha_text)
 driver.switch_to.window(driver.window_handles[0])
 def login_to_website():
-    AttendanceHTML = None
     MarksHTML = None
+    AttendanceHTML = None
     user_id = driver.find_element_by_xpath('//*[@id="txtUserid"]')
     user_id.clear()
     user_id.send_keys('180907644')
@@ -61,7 +61,7 @@ def login_to_website():
     captcha = driver.find_element_by_xpath('//*[@id="txtCaptcha"]')
     captcha.clear()
     captcha.send_keys(captcha_text)
-    time.sleep(3)
+    time.sleep(10)
     driver.find_element_by_xpath('//*[@id="btnLogin"]').click() 
     time.sleep(6)
     get_url = driver.current_url 
@@ -78,24 +78,19 @@ def login_to_website():
     element.click()
     WebDriverWait(driver, 5)
      #Find Attendance Table 
-    driver.find_element_by_xpath('//a[@href="#4"]').click();
+    driver.find_element_by_xpath('//a[@href="#3"]').click();
     element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, 'tblAttendancePercentage')))
     AttendanceHTML = element.get_attribute('outerHTML')
     #print(outer)
-
     #Find Internal Mark Table
-    driver.find_element_by_xpath('//a[@href="#6"]').click()
+    driver.find_element_by_xpath('//a[@href="#4"]').click()
     element = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.ID,'PrintInternal')))
     MarksHTML = element.get_attribute('outerHTML')
     #print(marks)
     #Logout of SLCM and close chromewebdriver
-    driver.get("https://slcm.manipal.edu/loginForm.aspx")
-    driver.close()
-    print(AttendanceHTML)
-    print(MarksHTML)
     return AttendanceHTML,MarksHTML
     
-login_to_website()
+AttendanceHTML,MarksHTML = login_to_website()
 
 # response = requests.get('https://slcm.manipal.edu/images/logo.png')
 # file = open("captchaimage.jpg", "wb")
