@@ -23,8 +23,11 @@ baseurl = 'https://slcm.manipal.edu/'
 url ="https://slcm.manipal.edu/loginForm.aspx"
 resp = requests.get(url,headers=headers)
 
+##op = webdriver.ChromeOptions()
+##op.add_argument('headless')
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
+# captcha_text=''
 def get_capt():
     s = BeautifulSoup(resp.content,features="lxml")
     images = s.find('img',{'id':'imgCaptcha'})['src']
@@ -55,6 +58,7 @@ def get_capt():
 
 driver.get(url)
 driver.implicitly_wait(3)
+# captcha_text=get_capt()
 
 
 
@@ -79,6 +83,9 @@ def login_to_website(username=None,password=None):
         element.click()
     except:
         print("Invalid Username/Password/Captcha")
+        # driver.close()
+        # driver.find_element_by_xpath('//*[@id="txtRefreshCaptcha"]').click()
+        # time.sleep(2)
         login_to_website(username, password)
         
     print ("Logged In")
@@ -87,6 +94,10 @@ def login_to_website(username=None,password=None):
     driver.find_element_by_xpath('//a[@href="#3"]').click();
     element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, 'tblAttendancePercentage')))
     AttendanceHTML = element.get_attribute('outerHTML')
+    #print(outer)
+    #Find Internal Mark Table
+    #print(marks)
+    #Logout of SLCM and close chromewebdriver
     driver.get("https://slcm.manipal.edu/loginForm.aspx")
     driver.quit()
     return AttendanceHTML
@@ -94,3 +105,7 @@ def login_to_website(username=None,password=None):
 if __name__ == "__main__":
     AttendanceHTML = login_to_website("username","password")
 
+# response = requests.get('https://slcm.manipal.edu/images/logo.png')
+# file = open("captchaimage.jpg", "wb")
+# file.write(response.content)
+# file.close()
