@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 # from slcm import user_name, pass_word
 import requests
-import urllib
 import time
 from PIL import Image
 from selenium import webdriver
@@ -21,8 +20,18 @@ tess.pytesseract.tesseract_cmd = r'D:\TESSERACT\tesseract.exe'
 headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4.4147.135 Safari/537.36' } 
 baseurl = 'https://slcm.manipal.edu/'
 url ="https://slcm.manipal.edu/loginForm.aspx"
-resp = requests.get(url,headers=headers)
-
+resp = ''
+while resp == '':
+    try:
+        resp = requests.get(url,headers=headers)
+        break
+    except:
+        print("Connection refused by the server..")
+        print("Let me sleep for 5 seconds")
+        print("ZZzzzz...")
+        time.sleep(5)
+        print("Was a nice sleep, now let me continue...")
+        continue
 ##op = webdriver.ChromeOptions()
 ##op.add_argument('headless')
 driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -66,6 +75,7 @@ def login_to_website(username=None,password=None):
     captcha_text=get_capt()
     MarksHTML = None
     AttendanceHTML = None
+    calendarHTML = None
     user_id = driver.find_element_by_xpath('//*[@id="txtUserid"]')
     user_id.clear()
     user_id.send_keys(username)
@@ -94,16 +104,27 @@ def login_to_website(username=None,password=None):
     driver.find_element_by_xpath('//a[@href="#3"]').click();
     element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, 'tblAttendancePercentage')))
     AttendanceHTML = element.get_attribute('outerHTML')
+
+    driver.find_element_by_xpath('//a[@href="#4"]').click()
+    element = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.ID,'PrintInternal')))
+    MarksHTML = element.get_attribute('outerHTML')
+    WebDriverWait(driver,3)
+    driver.get('https://slcm.manipal.edu/EventCalendar.aspx')
+    try:
+        element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, 'ContentPlaceHolder1_divAllRep')))    
+    except StaleElementReferenceException as e:
+        raise e
+    calendarHTML = element.get_attribute('outerHTML')
     #print(outer)
     #Find Internal Mark Table
     #print(marks)
     #Logout of SLCM and close chromewebdriver
     driver.get("https://slcm.manipal.edu/loginForm.aspx")
     driver.quit()
-    return AttendanceHTML
+    return AttendanceHTML,MarksHTML,calendarHTML
 
 if __name__ == "__main__":
-    AttendanceHTML = login_to_website("username","password")
+    AttendanceHTML,MarksHTML,calendarHTML = login_to_website("username","password")
 
 # response = requests.get('https://slcm.manipal.edu/images/logo.png')
 # file = open("captchaimage.jpg", "wb")
