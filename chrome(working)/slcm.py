@@ -16,15 +16,12 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return render_template("index.html")
-    
+
 @app.route("/displaySLCM",methods=["POST"])
 def getAttendance():
     print(request.form['username'],request.form['password'])
-    AttendanceHTML,MarksHTML,CalendarHTML = login_to_website(request.form['username'],request.form['password'])
-    print('hello')
-    calendarJSON = Calendar2JSON(CalendarHTML)
-    marksJSON = Internals2JSON(MarksHTML)
-    attendanceJSON = Attendance2JSON(AttendanceHTML)
+    login_to_website(request.form['username'],request.form['password'])
+    calendarJSON = Calendar2JSON()
     respo = Response(calendarJSON,200)
     respo.headers['Content-Type'] = "application/json"
     return respo
@@ -36,28 +33,28 @@ def handleRequest():
     password = request_body['password']
     tpe =request_body['type']
     if(tpe == "ATTENDANCE"):
-        attd,_,_=login_to_website(username,password)
-        jsn = Attendance2JSON(attd)
+        login_to_website(username,password)
+        jsn = Attendance2JSON()
         resp = Response(jsn,200)
         resp.headers['Content-Type'] = "application/json"
         return resp
     elif(tpe == "MARKS"):
-        _,marks,_ = login_to_website(username,password)
-        jsn = Internals2JSON(marks)
+        login_to_website(username,password)
+        jsn = Internals2JSON()
         resp = Response(jsn,200)
         resp.headers['Content-Type'] = "application/json"
         return resp
     elif(tpe == "CALENDAR"):
-        _,_,calendar = login_to_website(username,password)
-        jsn = Calendar2JSON(calendar)
+        login_to_website(username,password)
+        jsn = Calendar2JSON()
         resp = Response(jsn,200)
         resp.headers['Content-Type'] = "application/json"
         return resp
     elif(tpe == "ALL"):
-        attd,marks,calendar = login_to_website(username,password)
-        jsn1 = Internals2JSON(marks)
-        jsn2 = Attendance2JSON(attd)
-        jsn3 = Calendar2JSON(calendar)
+        login_to_website(username,password)
+        jsn1 = Internals2JSON()
+        jsn2 = Attendance2JSON()
+        jsn3 = Calendar2JSON()
         jsn = dict()
         jsn['marks'] = jsn1
         jsn['attendance'] = jsn2
@@ -71,4 +68,4 @@ def handleRequest():
     return "Error Occured"
 
 if __name__ == "__main__":
-    app.run(threaded=True)
+    app.run()

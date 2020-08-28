@@ -1,10 +1,10 @@
-from getcaptchaimg import login_to_website
 from bs4 import BeautifulSoup
 from json import dumps
-def Attendance2JSON(AttendanceHTML):
+def Attendance2JSON():
     attendanceJson = list()
     headers = list()
-    soup = BeautifulSoup(AttendanceHTML,'html.parser')
+    url = r'attendance.html'
+    soup = BeautifulSoup(open(url).read(),features='lxml')
     table = soup.find_all('table')[0]
     #Get Table Headers
     header = table.find_all('tr')[0]
@@ -20,11 +20,12 @@ def Attendance2JSON(AttendanceHTML):
         attendanceJson.append(temp)
     toret = dict({"attendance":attendanceJson})
     return dumps(toret,indent=4, sort_keys=True)
-def Internals2JSON(MarksHTML):
+def Internals2JSON():
     subjectsJSON = dict()
     headers = list()
     marksJSON = list()
-    soup = BeautifulSoup(MarksHTML,"html.parser")
+    url = r'marks.html'
+    soup = BeautifulSoup(open(url).read(),features='lxml')
     maindiv = soup.find("div",{"id":"accordion1"})
     subjects = maindiv.find_all_next("div",{"class":"panel panel-default"})
     for subject in subjects:
@@ -54,14 +55,15 @@ def Internals2JSON(MarksHTML):
                 marksJSON.append(temp)
     marksJSON = dict({"marks":marksJSON})
     return dumps(marksJSON,indent=4, sort_keys=True)
-
-def Calendar2JSON(calendarHTML):
-    soup = BeautifulSoup(calendarHTML,'html.parser')
+def Calendar2JSON():
+    url = r'calendar.html'
+    soup = BeautifulSoup(open(url).read(),features='lxml')
     textheader = soup.find_all('div',{'class':'event-header-even table-responsive'})
     calendarJson = list()
     #Get Table Headers
     headers = list()
     headers = ['date','notice','startdate','enddate','totaldays']
+    print(len(headers))
     i=0
     while(i<5):
         span = textheader[i].find_all('span')
@@ -79,3 +81,4 @@ if __name__ == "__main__":
     attendanceJSON = Attendance2JSON('AttendanceHTML')
     subjectJSON,marksJSON = Internals2JSON('MarksHTML')
     calendar2JSON = Calendar2JSON('calendarHTML')
+    print(calendar2JSON)
