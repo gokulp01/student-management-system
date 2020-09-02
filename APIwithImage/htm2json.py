@@ -75,6 +75,19 @@ def Calendar2JSON():
         i+=1
     calendar2JSON = {"calendar":calendarJson}
     return calendar2JSON
+def name_scrape():
+    urlname = r'homepage.html'
+    soup = BeautifulSoup(open(urlname).read(),features='lxml')
+    namefinal = soup.find('span',{'id':'lblUserName'})
+    name = namefinal.text
+    return name
+def image_scrape():
+    urlname = r'homepage.html'
+    soup = BeautifulSoup(open(urlname).read(),features='lxml')
+    image = soup.find('img',{'id':'Repeater1_Image2_0'})
+    url = image['src']
+    urlfinal = 'https://slcm.manipal.edu/' + url
+    return urlfinal
 
 
 if __name__ == "__main__":

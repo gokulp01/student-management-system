@@ -15,11 +15,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import pytesseract as tess
 from PIL import Image
-import pyautogui as P
-from binascii import a2b_base64
-import urllib
-from json import dumps
-from urllib import request
 tess.pytesseract.tesseract_cmd = r'D:\TESSERACT\tesseract.exe'
 headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4.4147.135 Safari/537.36' } 
 baseurl = 'https://slcm.manipal.edu/'
@@ -27,13 +22,14 @@ url ="https://slcm.manipal.edu/loginForm.aspx"
 resp = requests.get(url,headers=headers)
 chrome_options = Options()
     #chrome_options.add_argument('--window-size=800,800')
+chrome_options.add_argument('headless')
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--disable-extensions")
 chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument("--remote-debugging-port=9222")
 chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--auto-open-devtools-for-tabs ')
+
 driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=chrome_options)
 str=''
 def get_capt():
@@ -64,31 +60,6 @@ def get_capt():
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
     return captcha_text
-
-# 1603,128 
-# 1477,620
-# 1751,200
-def image_scrape():
-    P.click(x=1603, y=128)
-    time.sleep(1)
-    P.click(x=1477,y=620)
-    time.sleep(1)
-    P.click(button='right',x=1751, y=200)
-    time.sleep(1)
-    P.press('down',2)
-    P.press('enter')
-    time.sleep(1)
-    P.hotkey("ctrl", "l")
-    time.sleep(1)
-    P.hotkey("ctrl","v")
-    time.sleep(1)
-    P.press("enter")
-    str=driver.current_url
-    # print(str)
-    time.sleep(1)
-    response = urllib.request.urlopen(str)
-    with open('image.jpg', 'wb') as f:
-        f.write(response.file.read())
 
 def login_to_website(username=None,password=None):
     driver.maximize_window()
@@ -142,7 +113,6 @@ def login_to_website(username=None,password=None):
         with open('homepage.html', 'wb') as f:
             f.write(page.encode('utf-8'))
             # f.close()
-        image_scrape()
     else:
         print("Invalid Username/Password/Captcha")
         login_to_website(username, password)

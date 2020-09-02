@@ -1,14 +1,12 @@
 from flask import Flask,render_template,request,Response
 from getcaptchaimg import login_to_website
-from htm2json import Attendance2JSON,Internals2JSON,Calendar2JSON
+from htm2json import Attendance2JSON,Internals2JSON,Calendar2JSON,name_scrape,image_scrape
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
-from bs4 import BeautifulSoup
-from pyvirtualdisplay import Display
 from json import dumps
 import time
 
@@ -27,7 +25,7 @@ def getAttendance():
     respo.headers['Content-Type'] = "application/json"
     return respo
 
-@app.route("/api/v1/get",methods=["POST"])
+@app.route("/api/v1/post",methods=["POST"])
 def handleRequest():
     request_body = request.get_json()
     username = request_body['username']
@@ -59,12 +57,11 @@ def handleRequest():
         jsn1 = Internals2JSON()
         jsn2 = Attendance2JSON()
         jsn3 = Calendar2JSON()
-        urlname = r'homepage.html'
-        soup = BeautifulSoup(open(urlname).read(),features='lxml')
-        namefinal = soup.find('span',{'id':'lblUserName'})
-        name = namefinal.text
+        name = name_scrape()
+        image = image_scrape()
+        imagescrape = {'imageurl': image}
         namescrape = {'name': name}
-        jsn = {**namescrape, **jsn2 , **jsn1,**jsn3}
+        jsn = {**namescrape,**imagescrape,**jsn2 , **jsn1,**jsn3}
         jsonfinal = dumps(jsn,indent=4, sort_keys=True)
         resp = Response(jsonfinal,200)
         resp.headers['Content-Type'] = "application/json"
@@ -72,7 +69,7 @@ def handleRequest():
     else:
         resp = Response("Error",501)
         return resp
-    return "Error Occured"
+    return "Error"
 
 if __name__ == "__main__":
     app.run(threaded=True)
