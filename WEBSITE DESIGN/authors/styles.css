@@ -1,4 +1,8 @@
-.demo{ background: #e5e5e5; }
+.demo{ background: #9053c7;
+    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: linear-gradient(-135deg, #c850c0, #4158d0); }
 .our-team{
     border: 2px solid #ff3232;
     border-radius: 10px;
