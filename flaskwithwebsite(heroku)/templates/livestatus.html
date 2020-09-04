@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Live Status</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{url_for('static',filename='assets/css/main.css')}}" />
+		<link rel="stylesheet" href="{{url_for('static',filename='livestatus/styles.css')}}" />
+	<noscript><link rel="stylesheet" href="{{url_for('static',filename='assets/css/noscript.css')}}" /></noscript>
+	<link rel="stylesheet" href="{{url_for('static',filename='livestatus/iconstyle.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+	
+	</head>
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header" >
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<a href="https://github.com/l3thal14/pokedex">
+									<img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=l3thal14&repo=pokedex" />
+								  </a>
+							</header>
+							<footer>
+								
+										<div class="card card-1">
+											<h3> GitHub Repository Stats</h3>
+											<p id="userRepos" class="list-group mx-auto mb-5" style="width: 500px;color: #000">
+
+											</p>
+										</div>	
+										
+									</footer>
+									<div class="middle">
+										<a class="btn" href="https://github.com/gokulp01/slcm_api">
+										  <i class="fab fa-github"></i>
+										</a>
+										<a class="btn" href="slcmapp.herokuapp.com">
+											<img src="https://img.icons8.com/color/48/000000/heroku.png"/>
+										</a>
+									  </div>
+						</footer>
+							
+						</div>
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li style="color:white"><a href="/">Home</a></li>
+								<li style="color:white"><a href="/login">Login</a></li>
+								<li style="color:white"><a href="/livestatus">Live Status</a></li>
+								<li style="color:white"><a href="/authors">Authors</a></li>
+							</ul>
+						</nav>
+
+				</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{{url_for('static', filename = 'assets/js/jquery.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/jquery.dropotron.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/browser.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/breakpoints.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/util.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/main.js')}}"></script>
+			<script> 
+					// Get the GitHub username input form
+
+
+function requestUserRepos(){
+    
+    // Create new XMLHttpRequest object
+    const xhr = new XMLHttpRequest();
+    
+    // GitHub endpoint, dynamically passing in specified username
+    const url = `https://api.github.com/repos/L3thal14/Travel-Carbon-Footprint-Tracker`;
+   
+    // Open a new connection, using a GET request via URL endpoint
+    // Providing 3 arguments (GET/POST, The URL, Async True/False)
+    xhr.open('GET', url, true);
+    
+    // When request is received
+    // Process it here
+    xhr.onload = function () {
+    
+        // Parse API data into JSON
+        const data = JSON.parse(this.response);
+        // Loop over each object in data array
+      
+
+            // Get the ul with id of of userRepos
+            let ul = document.getElementById('userRepos');
+    
+            // Create variable that will create li's to be added to ul
+            let li = document.createElement('p');
+            
+            // Add Bootstrap list item class to each li
+            li.classList.add('list-group-item')
+        
+            // Create the html markup for each li
+            li.innerHTML = (`
+                <p>⭐ <strong>Total stars:   </strong>${data.stargazers_count}</p>
+                <p>🍴 <strong>Total forks:  </strong> ${data.forks_count}</p>
+                <p><i class="fa fa-bug" style="font-size:24px;color:red"></i><strong>   Total open issues:     </strong> ${data.open_issues_count}</p>
+            `);
+            
+            // Append each li to the ul
+            ul.appendChild(li);
+        
+
+    }
+    
+    // Send the request to the server
+    xhr.send();
+    
+}
+requestUserRepos();
+		</script>
+			<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+	</body>
+</html>

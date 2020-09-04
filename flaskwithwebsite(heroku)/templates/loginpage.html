@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SLCM Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{{url_for('static',filename='loginpage/images/icons/favicon.ico')}}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginpage/vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginpage/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginpage/vendor/animate/animate.css')}}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginpage/vendor/css-hamburgers/hamburgers.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginpage/vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginpage/css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginpage/css/main.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='assets/css/main.css')}}" />
+	<noscript><link rel="stylesheet" href="{{url_for('static',filename='assets/css/noscript.css')}}" /></noscript>
+<!--===============================================================================================-->
+</head>
+<body >
+	<nav id="nav">
+		<ul>
+			<li style="color:white"><a href="/">Home</a></li>
+			<li style="color:white"><a href="/login">Login</a></li>
+			<li style="color:white"><a href="/livestatus">Live Status</a></li>
+			<li style="color:white"><a href="/authors">Authors</a></li>
+		</ul>
+	</nav>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{{url_for('static',filename='loginpage/images/img-01.png')}}" alt="IMG">
+					<div class="text-lg-center p-t-100">
+						<p style="color:red;font-size: 20px" >
+							Disclaimer: We do not store your data in any form of cloud or local storage.
+						</p>
+					</div>
+				</div>
+
+				<form class="login100-form validate-form" method="POST" action="/results">
+					<span class="login100-form-title">
+						Student Login
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="number" name="username" placeholder="Registration Number">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+		
+						<button class="login100-form-btn" onclick="location.href='/results'" >
+							Login
+						</button>
+					</div>
+					
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<!--===============================================================================================-->	
+	<script src="{{url_for('static',filename='loginpage/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{url_for('static',filename='loginpage/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{url_for('static',filename='loginpage/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{url_for('static',filename='loginpage/vendor/select2/select2.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{url_for('static',filename='loginpage/vendor/tilt/tilt.jquery.min.js')}}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{{url_for('static',filename='loginpage/js/main.js')}}"></script>
+	
+	
+
+</body>
+</html>

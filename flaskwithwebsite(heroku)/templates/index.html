@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>SLCM API</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/main.css')}}" />
+		<noscript><link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/noscript.css')}}" /></noscript>
+	
+	</head>
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="index.html" id="logo">SLCM API</a></h1>
+								<hr />
+								<p>The saviour</p>
+							</header>
+						<div>
+							<footer>
+								<embed type="text/html" src="{{url_for('static',filename = 'attendance.html')}}" width="600" height="580">
+									<embed type="text/html" src="{{url_for('static',filename = 'piechart.html')}}" width="600" height="580">
+										<embed type="text/html" src="{{url_for('static',filename = 'calendar.html')}}" width="600" height="585">
+							</footer>
+						</div>
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="/">Home</a></li>
+								<li><a href="/login">Login</a></li>
+								<li><a href="/livestatus">Live Status</a></li>
+								<li><a href="/authors">Authors</a></li>
+							</ul>
+						</nav>
+
+				</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{{url_for('static', filename = 'assets/js/jquery.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/jquery.dropotron.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/browser.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/breakpoints.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/util.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/main.js')}}"></script>
+
+	</body>
+</html>
