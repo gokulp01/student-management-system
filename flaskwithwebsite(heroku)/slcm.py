@@ -1,14 +1,12 @@
 from flask import Flask,render_template,request,Response,redirect
 from getcaptchaimg import login_to_website
 from htm2json import Attendance2JSON,Internals2JSON,Calendar2JSON,name_scrape,image_scrape
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.chrome.options import Options
 from json import dumps
-
+from json2html import *
+import requests
+from PIL import Image
+import io
+import base64
 app = Flask(__name__)
 
 @app.route("/")
@@ -23,22 +21,27 @@ def authorspage():
 @app.route("/livestatus")
 def livestatus():
     return render_template("livestatus.html")
-@app.route("/results")
-def results():
-    return render_template("afterlogin.html")    
-
 @app.route("/results",methods=["POST"])
 def getAttendance():
     print(request.form['username'],request.form['password'])
     login_to_website(request.form['username'],request.form['password'])
     attendanceJSON = Attendance2JSON()
     marksJSON = Internals2JSON()
-    jsonfinal = dumps(marksJSON,indent=4, sort_keys=True)
-    resp = Response(jsonfinal,200)
-    resp.headers['Content-Type'] = "application/json"
+    calendarJSON = Calendar2JSON()
     name = name_scrape()
     namescrape = {'name': name}
-    return render_template("afterlogin.html",attd=attendanceJSON,marks=marksJSON,greetingname=name,final = resp)
+    calendarfinal = json2html.convert(json = calendarJSON['calendar'])
+    attendancefinal = json2html.convert(json = attendanceJSON['attendance'])
+    markfinal = json2html.convert(json = marksJSON['marks'])
+    url = "https://slcm.manipal.edu/imagereader.aspx"
+    imagelink = image_scrape()
+    imagepath=imagelink.split("ImagePath=",1)[1]
+    querystring = {"FileName":"","ImagePath": "{}".format(imagepath)}
+    response = requests.request("GET", url, params=querystring)
+    image = Image.open(io.BytesIO(response.content))
+    encoded = base64.b64encode(response.content).decode('UTF-8')
+    datauri = "data:image/png;base64," + encoded
+    return render_template("afterlogin.html",mark=markfinal,greetingname=name,atten = attendancefinal,cal = calendarfinal,datauri = datauri)
 
 @app.route("/api/v1/post",methods=["POST"])
 def handleRequest():
@@ -87,4 +90,4 @@ def handleRequest():
     return "Error"
 
 if __name__ == "__main__":
-    app.run(threaded=True)
+    app.run(port=5500,debug=True)

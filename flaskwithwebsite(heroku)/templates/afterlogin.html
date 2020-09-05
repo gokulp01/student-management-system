@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <!--
-	Big Picture by HTML5 UP
+	Landed by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
@@ -12,90 +12,105 @@
 		<link rel="stylesheet" href="{{url_for('static',filename='afterlogin/assets/css/main.css')}}" />
 		<noscript><link rel="stylesheet" href="{{url_for('static',filename='afterlogin/assets/css/noscript.css')}}" /></noscript>
 	</head>
-	<body class="is-preload">
+	<body class="is-preload landing">
+		<div id="page-wrapper">
 
-		<!-- Header -->
-			<header id="header">
-				<h1>Welcome to the Results</h1>
-			</header>
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="/login"><span>&#8592;</span>
+ 												Go Back</a></h1>
+ 						<nav id="nav">
+							<ul>
+								<li><a href="#one">Attendance</a></li>
+								<li><a href="#two">Marks</a></li>
+								<li><a href="#three">Calendar</a></li>
+							</ul>
+						</nav>
+				</header>
+			<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h2>WELCOME</h2>
+							<p>{{greetingname}}</p>
+						</header>
+						<span class="image"><img src="{{datauri}}" alt="" /></span>
+					</div>
+					<a href="#one" class="goto-next scrolly">Next</a>
+				</section>
 
-		<!-- Intro -->
-			<section id="intro" class="main style1 dark fullscreen">
-				<div class="content">
-					<header>
-						<h3>Hey {{greetingname}}</h3>
-					</header>
-					<footer>
-						<a href="#one" class="button style2 down">More</a>
-					</footer>
-				</div>
-			</section>
-
-		<!-- One -->
-			<section id="one" class="main style2 right dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>What I Do</h2>
-					</header>
-					<p> {{attd}}</p>
-				</div>
-				<a href="#two" class="button style2 down anchored">Next</a>
-			</section>
-
-		<!-- Two -->
-			<section id="two" class="main style2 left dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>Who I Am</h2>
-					</header>
-					
-					<img src ="https://i.gadgets360cdn.com/large/nvidia_geforce_rtx_3080_angle_1598979564701.jpg?downsize=950:*&output-quality=80&output-format=webp" width="600" height="250">
-				</div>
-				<a href="#work" class="button style2 down anchored">Next</a>
-			</section>
-
-		<!-- Work -->
-			<section id="work" class="main style3 primary">
-				<div class="content">
-					<header>
-						<h2>My Work</h2>
-						<p> {{resp}}</p>
-					</header>
-
-					<!-- Gallery  -->
-						<div class="gallery">
-							<article class="from-left">
-								<a href="{{url_for('static',filename='afterlogin/images/fulls/01.jpg')}}" class="image fit"><img src="{{url_for('static',filename='afterlogin/images/thumbs/01.jpg')}}" title="The Anonymous Red" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="{{url_for('static',filename='afterlogin/images/fulls/02.jpg')}}" class="image fit"><img src="{{url_for('static',filename='afterlogin/images/thumbs/02.jpg')}}" title="Airchitecture II" alt="" /></a>
-							</article>
-							<article class="from-left">
-								<a href="{{url_for('static',filename='afterlogin/images/fulls/03.jpg')}}" class="image fit"><img src="{{url_for('static',filename='afterlogin/images/thumbs/03.jpg')}}" title="Air Lounge" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="{{url_for('static',filename='afterlogin/images/fulls/04.jpg')}}" class="image fit"><img src="{{url_for('static',filename='afterlogin/images/thumbs/04.jpg')}}" title="Carry on" alt="" /></a>
-							</article>
-							<article class="from-left">
-								<a href="{{url_for('static',filename='afterlogin/images/fulls/05.jpg')}}" class="image fit"><img src="{{url_for('static',filename='afterlogin/images/thumbs/05.jpg')}}" title="The sparkling shell" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="{{url_for('static',filename='afterlogin/images/fulls/06.jpg')}}" class="image fit"><img src="{{url_for('static',filename='afterlogin/images/thumbs/06.jpg')}}" title="Bent IX" alt="" /></a>
-							</article>
+			<!-- One -->
+				<section id="one" class="spotlight style1 bottom">
+					<span class="image fit main"><img src="" alt="" /></span>
+					<div class="content">
+						
+						<div class="container">
+								{{atten|safe}}
+							<div class="row">
+								
+							</div>
 						</div>
+					</div>
+					<a href="#two" class="goto-next scrolly">Next</a>
+				</section>
 
-				</div>
-			</section>
+			<!-- Two -->
+				<section id="two" class="spotlight style1 bottom">
+					<span class="image fit main"><img src="" alt="" /></span>
+					<div class="content">
+						
+						<div class="container">
+							{{mark|safe}}<p>Coming Soon</p>
+							<div class="row">
+								
+							</div>
+						</div>
+					</div>
+					<a href="#three" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Three -->
+				<section id="three" class="spotlight style1 bottom">
+					<span class="image fit main"><img src="" alt="" /></span>
+					<div class="content">
+						<div class="container">
+							{{cal|safe}}							
+							<div class="row">
+								
+							</div>
+						</div>
+					</div>
+					<a href="#footer" class="goto-next scrolly">Next</a>
+				</section>
+
+
+			<!-- Five -->
+				<section id="four" class="wrapper style2 special fade">
+					<div class="container">
+								<h1><a href="/login"><span>&#8592;</span>
+									Go Back</a></h1>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="https://github.com/gokulp01/slcm_api" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</footer>
+
+		</div>
 
 		<!-- Scripts -->
-		<script src="{{url_for('static',filename='afterlogin/assets/js/jquery.min.js')}}"></script>
-			<script src="{{url_for('static',filename='afterlogin/assets/js/jquery.poptrox.min.js')}}"></script>
+			<script src="{{url_for('static',filename='afterlogin/assets/js/jquery.min.js')}}"></script>
 			<script src="{{url_for('static',filename='afterlogin/assets/js/jquery.scrolly.min.js')}}"></script>
+			<script src="{{url_for('static',filename='afterlogin/assets/js/jquery.dropotron.min.js')}}"></script>
 			<script src="{{url_for('static',filename='afterlogin/assets/js/jquery.scrollex.min.js')}}"></script>
 			<script src="{{url_for('static',filename='afterlogin/assets/js/browser.min.js')}}"></script>
 			<script src="{{url_for('static',filename='afterlogin/assets/js/breakpoints.min.js')}}"></script>
 			<script src="{{url_for('static',filename='afterlogin/assets/js/util.js')}}"></script>
-			<script src="{{url_for('static',filename='afterlogin/assets/js/main.js')}}"></script>/script>
+			<script src="{{url_for('static',filename='afterlogin/assets/js/main.js')}}"></script>
 
 	</body>
 </html>
